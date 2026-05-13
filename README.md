@@ -8,6 +8,7 @@
 
 - `ghostty_config`：我的 Ghostty 终端配置
 - `zshrc`：Zsh 片段（补全 / 自动建议 / 语法高亮 / Starship）
+- `startship.toml`：Starship 主题配置（已调整彩虹桥外观，整体更简洁）
 
 ## 1）Ghostty 配置（手动复制）
 
@@ -44,7 +45,9 @@ echo "source $(pwd)/zshrc" >> ~/.zshrc
 source ~/.zshrc
 ```
 
+
 ## 说明
 
 - 本仓库刻意采用“手动优先”，以降低配置覆盖风险。
 - `zshrc` 已做存在性判断：即使部分插件未安装，也不会因为 `source` 失败而中断 shell 启动。
+- `startship.toml` 主要是对彩虹桥样式做了简化，减少视觉噪音，保持更清爽的提示符外观。
