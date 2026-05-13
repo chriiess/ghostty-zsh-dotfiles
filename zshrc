@@ -7,6 +7,14 @@ compinit -d ~/.zcompdump
 # More forgiving completion matching for paths and tokens.
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 
+# Make native completion much stronger when history has no match.
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' max-errors 1 numeric
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 BREW_PREFIX="$(brew --prefix 2>/dev/null || true)"
 if [[ -n "$BREW_PREFIX" ]]; then
   [[ -f "$BREW_PREFIX/opt/fzf/shell/completion.zsh" ]] && source "$BREW_PREFIX/opt/fzf/shell/completion.zsh"
@@ -16,7 +24,7 @@ if [[ -n "$BREW_PREFIX" ]]; then
 fi
 
 # Prefer filesystem completion suggestions over stale history.
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 bindkey '^[[C' autosuggest-accept
 
