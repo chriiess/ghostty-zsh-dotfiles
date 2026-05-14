@@ -26,7 +26,18 @@ fi
 # Prefer filesystem completion suggestions over stale history.
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
-bindkey '^[[C' autosuggest-accept
+# Right arrow smart behavior:
+# - if cursor is inside the current command, move right normally
+# - if cursor is at end and a suggestion exists, accept autosuggestion
+_right_arrow_smart_accept() {
+  if [[ $CURSOR -lt ${#BUFFER} ]]; then
+    zle forward-char
+  elif [[ -n "$POSTDISPLAY" ]]; then
+    zle autosuggest-accept
+  fi
+}
+zle -N _right_arrow_smart_accept
+bindkey '^[[C' _right_arrow_smart_accept
 
 # Prompt
 if command -v starship >/dev/null 2>&1; then
