@@ -11,6 +11,17 @@
 - `zshrc`：Zsh 片段（补全 / 自动建议 / 语法高亮 / Starship）
 - `starship.toml`：Starship 主题配置
 
+## 本项目的补全优化
+
+当前配置对 Zsh 自动补全做了较多增强，重点包括：
+
+- 更宽松的匹配规则：支持大小写与 `._-` 分隔符的模糊匹配
+- 更强的补全链路：`_complete + _match + _approximate` 组合
+- 轻量容错：拼写误差可自动近似匹配（`max-errors 1`）
+- 交互体验优化：补全菜单选择、补全缓存、颜色高亮
+- 历史与补全协同：`ZSH_AUTOSUGGEST_STRATEGY=(history completion)`
+- 右箭头智能接受建议：光标在行尾时可直接接受 autosuggestion
+
 ## 快速流程（建议顺序）
 
 ### 1) 安装依赖
